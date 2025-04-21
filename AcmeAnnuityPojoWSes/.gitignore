@@ -1,0 +1,12 @@
+/.apt_generated/
+/target/
+/build/
+/bin/
+.classpath
+.project
+.factorypath
+/.settings/
+.*.swp
+.DS_Store
+.metadata
+/.apt_generated_tests/

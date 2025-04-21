@@ -1,0 +1,51 @@
+//////////////////////////////////////////////////
+//
+// WebSphere Application Server Security Policy
+//
+//////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////
+// Allow all access to the file system and runtime classes
+////////////////////////////////////////////////////////////////////////
+grant codeBase "file:${application}" {
+  permission java.util.logging.LoggingPermission "control";
+  permission java.security.AllPermission;
+};
+
+grant codeBase "file:${jars}" {
+  permission java.security.AllPermission;
+};
+
+grant codeBase "file:${connectorComponent}" {
+  permission java.security.AllPermission;
+};
+
+grant codeBase "file:${webComponent}" {
+  permission java.security.AllPermission;
+  permission com.ibm.websphere.security.WebSphereRuntimePermission "AdminPermission";
+  permission com.ibm.websphere.management.AdminPermission "getAdminService";
+  permission com.ibm.websphere.management.AdminPermission "getMBeanFactory";
+  permission com.tivoli.jmx.MBeanServerPermission "MBeanServerFactory.*";
+  permission com.tivoli.jmx.MBeanServerPermission "MBeanServer.*";
+};
+
+grant codeBase "file:${ejbComponent}" {
+  permission java.security.AllPermission;
+  permission com.ibm.websphere.security.WebSphereRuntimePermission "AdminPermission";
+  permission com.ibm.websphere.management.AdminPermission "getAdminService";
+  permission com.ibm.websphere.management.AdminPermission "getMBeanFactory";
+  permission com.tivoli.jmx.MBeanServerPermission "MBeanServerFactory.*";
+  permission com.tivoli.jmx.MBeanServerPermission "MBeanServer.*";
+
+};
+grant {
+  permission java.security.AllPermission;
+};
+
+grant codeBase "file:${application}" {
+  permission com.ibm.websphere.security.WebSphereRuntimePermission "AdminPermission";
+  permission com.ibm.websphere.management.AdminPermission "getAdminService";
+  permission com.ibm.websphere.management.AdminPermission "getMBeanFactory";
+  permission com.tivoli.jmx.MBeanServerPermission "MBeanServerFactory.*";
+  permission com.tivoli.jmx.MBeanServerPermission "MBeanServer.*";
+};

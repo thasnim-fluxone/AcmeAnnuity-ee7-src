@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  $Rev: 820 $
+  $Date: 2007-09-26 16:49:27 -0500 (Wed, 26 Sep 2007) $
+  $Author: mohammad $
+  $LastChangedBy: mohammad $
+ -->
+ <!--  
+ <persistence xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.0" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+ -->
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.1"
+xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"> 
+ 
+    <persistence-unit name="AnnuityDSJPAOnly" transaction-type="JTA">
+		<jta-data-source>java:comp/env/jdbc/AnnuityDBDS</jta-data-source>
+		<mapping-file>META-INF/JPAorm.xml</mapping-file>
+		
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jpa.AbstractPersistebleObject</class>
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jpa.AnnuityPersistebleObject</class>  
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jpa.Annuity</class>  
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jpa.FixedAnnuity</class>
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jpa.EquityAnnuity</class>        
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jpa.Payout</class>        
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jpa.Rider</class>       
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jpa.Payor</class>       
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jpa.Person</class>          
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jpa.AnnuityHolder</class>                       
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jpa.Contact</class>     
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jpa.Address</class>
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jpa.ConfigData</class>                  
+        <class>com.ibm.wssvt.acme.annuity.common.bean.ContactTypeConverter</class>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+
+        <properties>			
+      		<property name="openjpa.Log" value="DefaultLevel=TRACE,SQL=TRACE,File=jpaLog.log,Runtime=TRACE,Tool=TRACE"/>
+      		<property name="openjpa.ConnectionFactoryProperties" value="PrettyPrint=true, PrettyPrintLineLength=72"/>
+      		
+			<property name="openjpa.ConnectionFactoryMode" value="managed" />
+			<!-- Commented out due to RTC defect 175179.       		
+      		<property name="openjpa.DetachState" value="fgs(DetachedStateField=true)" /> -->
+      		<!-- This openjpa.Compatibility property is included on all PUs because of some detach and proxy changes that went into defect 643927. 
+      		<property name="openjpa.Compatibility"  value="IgnoreDetachedStateFieldForProxySerialization=true" /> -->
+      		<property name="openjpa.jdbc.Schema" value="EJB30" />
+      		<property name="openjpa.jdbc.TransactionIsolation" value="read-committed"/>
+      		<!--  Added for RTC Defect 139499 -->
+      		<property name="eclipselink.tolerate-invalid-jpql" value="true"/>
+      		<!--  To disable cache while running in collective env -->
+      		<property name="eclipselink.cache.shared.default" value="false"/>      		
+		</properties>
+
+	</persistence-unit>
+	
+    <persistence-unit name="AnnuityDSJAXBJPA" transaction-type="JTA">
+		<jta-data-source>java:comp/env/jdbc/AnnuityDBDS</jta-data-source>    
+		<mapping-file>META-INF/JAXBorm.xml</mapping-file>      
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jaxbjpa.AnnuityPersistebleObject</class>  
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jaxbjpa.Annuity</class>  
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jaxbjpa.FixedAnnuity</class>
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jaxbjpa.EquityAnnuity</class>        
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jaxbjpa.Payout</class>        
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jaxbjpa.Rider</class>       
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jaxbjpa.Payor</class>       
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jaxbjpa.Person</class>          
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jaxbjpa.AnnuityHolder</class>                       
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jaxbjpa.Contact</class>     
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jaxbjpa.Address</class>
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jaxbjpa.ConfigData</class>     
+        <class>com.ibm.wssvt.acme.annuity.common.bean.ContactTypeConverter</class>     
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+
+        <properties>			
+      		<property name="openjpa.Log" value="DefaultLevel=TRACE,SQL=TRACE,File=jpaLog.log,Runtime=TRACE,Tool=TRACE"/>
+      		<property name="openjpa.ConnectionFactoryProperties" value="PrettyPrint=true, PrettyPrintLineLength=72"/>
+      		
+			<property name="openjpa.ConnectionFactoryMode" value="managed" />
+			<!-- Commented out due to RTC defect 175179.
+      		<property name="openjpa.DetachState" value="fgs(DetachedStateField=true)" /> 
+      		<property name="openjpa.Compatibility"  value="IgnoreDetachedStateFieldForProxySerialization=true" /> -->
+      		<property name="openjpa.jdbc.Schema" value="EJB30" />
+      		<property name="openjpa.jdbc.TransactionIsolation" value="read-committed"/>
+      		<!--  Added for RTC Defect 139499 -->
+      		<property name="eclipselink.tolerate-invalid-jpql" value="true"/> 
+      		<!--  To disable cache while running in collective env -->
+      		<property name="eclipselink.cache.shared.default" value="false"/>      		
+		</properties>
+
+	</persistence-unit>
+
+	<persistence-unit name="PolicyDSJPAOnly" transaction-type="JTA">
+		<jta-data-source>java:comp/env/jdbc/AnnuityDBDS</jta-data-source>
+		<mapping-file>META-INF/JPAorm.xml</mapping-file>
+
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jpa.AbstractPersistebleObject</class>
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jpa.AnnuityPersistebleObject</class>  
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jpa.Annuity</class>  
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jpa.FixedAnnuity</class>
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jpa.EquityAnnuity</class>        
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jpa.Payout</class>        
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jpa.Rider</class>       
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jpa.Payor</class>       
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jpa.Person</class>          
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jpa.AnnuityHolder</class>                       
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jpa.Contact</class>     
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jpa.Address</class>
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jpa.Policy</class>
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jpa.Fund</class>
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jpa.Beneficiary</class>
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jpa.BeneContact</class>
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jpa.BeneContactId</class>
+        <class>com.ibm.wssvt.acme.annuity.common.bean.ContactTypeConverter</class>
+                          
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+
+        <properties>			
+      		<property name="openjpa.Log" value="DefaultLevel=TRACE,SQL=TRACE,File=jpaLog.log,Runtime=TRACE,Tool=TRACE"/>
+      		<property name="openjpa.ConnectionFactoryProperties" value="PrettyPrint=true, PrettyPrintLineLength=72"/>
+      		
+			<property name="openjpa.ConnectionFactoryMode" value="managed" />
+      		<!-- Commented out due to RTC defect 175179.
+      		<property name="openjpa.DetachState" value="fgs(DetachedStateField=true)" /> 
+      		<property name="openjpa.Compatibility"  value="IgnoreDetachedStateFieldForProxySerialization=true" /> -->
+      		<property name="openjpa.jdbc.Schema" value="EJB30" />
+      		<property name="openjpa.jdbc.TransactionIsolation" value="read-committed"/>
+      		<property name="eclipselink.tolerate-invalid-jpql" value="true"/>
+      		<!--  To disable cache while running in collective env -->
+      		<property name="eclipselink.cache.shared.default" value="false"/> 
+		</properties>
+
+	</persistence-unit>
+	
+	
+	<persistence-unit name="AnnuitySAJPAOnly" transaction-type="RESOURCE_LOCAL" >
+		<mapping-file>META-INF/JPAorm.xml</mapping-file>
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jpa.AbstractPersistebleObject</class>
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jpa.AnnuityPersistebleObject</class>  
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jpa.Annuity</class>  
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jpa.FixedAnnuity</class>
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jpa.EquityAnnuity</class>        
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jpa.Payout</class>        
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jpa.Rider</class>       
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jpa.Payor</class>       
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jpa.Person</class>          
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jpa.AnnuityHolder</class>                       
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jpa.Contact</class>     
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jpa.Address</class>     
+		<class>com.ibm.wssvt.acme.annuity.common.bean.jpa.ConfigData</class>     
+		<class>com.ibm.wssvt.acme.annuity.common.bean.ContactTypeConverter</class>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+
+		<properties>
+			<property name="openjpa.ConnectionFactoryMode" value="local" />
+      		<!-- Commented out due to RTC defect 175179
+      		<property name="openjpa.DetachState" value="fgs(DetachedStateField=true)" /> 
+      		<property name="openjpa.Compatibility"  value="IgnoreDetachedStateFieldForProxySerialization=true" /> -->
+      		<property name="openjpa.jdbc.TransactionIsolation" value="read-committed"/>
+      		<property name="eclipselink.tolerate-invalid-jpql" value="true"/>
+      		<!--  To disable cache while running in collective env -->
+      		<property name="eclipselink.cache.shared.default" value="false"/> 
+		</properties>
+
+	</persistence-unit>        
+
+	<persistence-unit name="AnnuitySAJAXBJPA" transaction-type="RESOURCE_LOCAL" >
+		<mapping-file>META-INF/JAXBorm.xml</mapping-file>
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jaxbjpa.AnnuityPersistebleObject</class>  
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jaxbjpa.Annuity</class>  
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jaxbjpa.FixedAnnuity</class>
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jaxbjpa.EquityAnnuity</class>        
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jaxbjpa.Payout</class>        
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jaxbjpa.Rider</class>       
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jaxbjpa.Payor</class>       
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jaxbjpa.Person</class>          
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jaxbjpa.AnnuityHolder</class>                       
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jaxbjpa.Contact</class>     
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jaxbjpa.Address</class>     
+		<class>com.ibm.wssvt.acme.annuity.common.bean.jaxbjpa.ConfigData</class>     
+		<class>com.ibm.wssvt.acme.annuity.common.bean.ContactTypeConverter</class>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+
+		<properties>
+			<property name="openjpa.ConnectionFactoryMode" value="local" />
+			<!-- Commented out due to RTC defect 175179.
+      		<property name="openjpa.DetachState" value="fgs(DetachedStateField=true)" /> 
+      		<property name="openjpa.Compatibility"  value="IgnoreDetachedStateFieldForProxySerialization=true" /> -->
+     		<property name="openjpa.jdbc.TransactionIsolation" value="read-committed"/>
+     		<property name="eclipselink.tolerate-invalid-jpql" value="true"/>
+     		<!--  To disable cache while running in collective env -->
+      		<property name="eclipselink.cache.shared.default" value="false"/> 
+		</properties>
+
+	</persistence-unit> 
+	
+	<persistence-unit name="PolicySAJPAOnly" transaction-type="RESOURCE_LOCAL" >
+		<mapping-file>META-INF/JPAorm.xml</mapping-file>
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jpa.AbstractPersistebleObject</class>
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jpa.AnnuityPersistebleObject</class>  
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jpa.Annuity</class>  
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jpa.FixedAnnuity</class>
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jpa.EquityAnnuity</class>        
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jpa.Payout</class>        
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jpa.Rider</class>       
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jpa.Payor</class>       
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jpa.Person</class>          
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jpa.AnnuityHolder</class>                       
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jpa.Contact</class>     
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jpa.Address</class> 
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jpa.Policy</class>
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jpa.Fund</class>
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jpa.Beneficiary</class>
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jpa.BeneContact</class>
+        <class>com.ibm.wssvt.acme.annuity.common.bean.jpa.BeneContactId</class>
+		<class>com.ibm.wssvt.acme.annuity.common.bean.ContactTypeConverter</class>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+
+		<properties>
+			<property name="openjpa.ConnectionFactoryMode" value="local" />
+      		<!-- Commented out due to RTC defect 175179.
+      		<property name="openjpa.DetachState" value="fgs(DetachedStateField=true)" /> 
+      		<property name="openjpa.Compatibility"  value="IgnoreDetachedStateFieldForProxySerialization=true" /> -->
+      		<property name="openjpa.jdbc.TransactionIsolation" value="read-committed"/>
+      		<property name="eclipselink.tolerate-invalid-jpql" value="true"/>
+      		<!--  To disable cache while running in collective env -->
+      		<property name="eclipselink.cache.shared.default" value="false"/> 
+		</properties>
+
+	</persistence-unit>          		
+</persistence>

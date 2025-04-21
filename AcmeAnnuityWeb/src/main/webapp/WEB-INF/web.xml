@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="AnnuityWebWAR" version="3.0"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	metadata-complete="false">
+	<display-name>AnnuityWeb</display-name>
+	<servlet id="Servlet_1173396133140">
+		<description></description>
+		<display-name>AnnuityWebServlet</display-name>
+		<servlet-name>AnnuityWebServlet</servlet-name>
+		<servlet-class>com.ibm.wssvt.acme.annuity.web.AnnuityWebServlet</servlet-class>
+	</servlet>
+	<!-- <servlet> <servlet-name>Faces Servlet</servlet-name> <servlet-class>javax.faces.webapp.FacesServlet</servlet-class> 
+		<load-on-startup>1</load-on-startup> </servlet> -->
+	<servlet-mapping>
+		<servlet-name>AnnuityWebServlet</servlet-name>
+		<url-pattern>common/AnnuityWebServlet</url-pattern>
+	</servlet-mapping>
+	<!-- <servlet-mapping> <servlet-name>Faces Servlet</servlet-name> <url-pattern> 
+		/faces/*</url-pattern> </servlet-mapping> -->
+
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+
+
+	<!-- These 2 jaxrpc to jaxws services are disabled due to defect 561655 
+		<service-ref> <description>JAXRPC to Pojo JAXWS Service AnnuityMgmtSvcPojoJAXWSImpl</description> 
+		<service-ref-name>services/AnnuityMgmtSvcPojoJAXWSImpl</service-ref-name> 
+		<service-interface>com.ibm.wssvt.acme.annuity.common.client.jaxrpc.jaxrpc2pojojaxwsimpl.AnnuityMgmtSvcPojoJAXWSImpl</service-interface> 
+		<wsdl-file>WEB-INF/classes/wsdl/AnnuityMgmtSvcPojoJAXWSImpl.wsdl</wsdl-file> 
+		<jaxrpc-mapping-file>WEB-INF/classes/wsdl/AnnuityMgmtSvcPojoJAXWSImpl_mapping.xml</jaxrpc-mapping-file> 
+		<service-qname xmlns:pfx="http://jaxws.client.common.annuity.acme.wssvt.ibm.com/pojoimpl/">pfx:AnnuityMgmtSvcPojoJAXWSImpl</service-qname> 
+		<port-component-ref> <service-endpoint-interface>com.ibm.wssvt.acme.annuity.common.client.jaxrpc.jaxrpc2pojojaxwsimpl.AnnuityMgmtSvcPojoJAXWS</service-endpoint-interface> 
+		</port-component-ref> </service-ref> <service-ref> <description>JAXRPC to 
+		EJB3 JAXWS Service AnnuityMgmtSvcEJB30JAXWSImpl</description> <service-ref-name>services/AnnuityMgmtSvcEJB30JAXWSImpl</service-ref-name> 
+		<service-interface>com.ibm.wssvt.acme.annuity.common.client.jaxrpc.jaxrpc2ejb3jaxwsimpl.AnnuityMgmtSvcEJB30JAXWSImpl</service-interface> 
+		<wsdl-file>WEB-INF/classes/wsdl/AnnuityMgmtSvcEJB30JAXWSImpl.wsdl</wsdl-file> 
+		<jaxrpc-mapping-file>WEB-INF/classes/wsdl/AnnuityMgmtSvcEJB30JAXWSImpl_mapping.xml</jaxrpc-mapping-file> 
+		<service-qname xmlns:pfx="http://jaxws.client.common.annuity.acme.wssvt.ibm.com/ejb3impl/">pfx:AnnuityMgmtSvcEJB30JAXWSImpl</service-qname> 
+		<port-component-ref> <service-endpoint-interface>com.ibm.wssvt.acme.annuity.common.client.jaxrpc.jaxrpc2ejb3jaxwsimpl.AnnuityMgmtSvcEJB30JAXWS</service-endpoint-interface> 
+		</port-component-ref> </service-ref> -->
+
+	<!-- <ejb-local-ref id="AnnuityMgmtSvcEJB2xBeanRef"> <ejb-ref-name>ejb/AnnuityMgmtSvcEJB2xBean</ejb-ref-name> 
+		<ejb-ref-type>Session</ejb-ref-type> <local-home>com.ibm.wssvt.acme.annuity.common.business.ejb2x.AnnuityMgmtSvcEJB2xLocalHome</local-home> 
+		<local>com.ibm.wssvt.acme.annuity.common.business.ejb2x.AnnuityMgmtSvcEJB2xLocal</local> 
+		<ejb-link>AnnuityMgmtSvcEJB2xBean</ejb-link> </ejb-local-ref> -->
+
+	<error-page>
+		<exception-type>java.lang.Exception</exception-type>
+		<location>/errorPage.jsp</location>
+	</error-page>
+
+	<security-constraint>
+		<display-name>Security</display-name>
+		<web-resource-collection>
+			<web-resource-name>AnnuityWebRsr</web-resource-name>
+			<url-pattern>/*</url-pattern>
+			<http-method>GET</http-method>
+			<http-method>POST</http-method>
+		</web-resource-collection>
+		<auth-constraint>
+			<description>The Admins Role</description>
+			<role-name>admins</role-name>
+			<role-name>users</role-name>
+		</auth-constraint>
+	</security-constraint>
+
+	<security-role>
+		<description>The Admins Role</description>
+		<role-name>admins</role-name>
+	</security-role>
+	<security-role>
+		<description>The users Role</description>
+		<role-name>users</role-name>
+	</security-role>
+
+	<login-config>
+		<auth-method>FORM</auth-method>
+		<form-login-config>
+			<form-login-page>/login.jsp</form-login-page>
+			<form-error-page>/errorPage.jsp</form-error-page>
+		</form-login-config>
+	</login-config>
+
+	<filter>
+		<filter-name>struts2</filter-name>
+		<filter-class>org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>struts2</filter-name>
+		<url-pattern>/acmestruts/*</url-pattern>
+	</filter-mapping>
+	<!-- <resource-ref> <res-ref-name>jms/ACMEAnnuityJMSConnectionFactory</res-ref-name> 
+		<res-type>javax.jms.ConnectionFactory</res-type> <res-auth>Container</res-auth> 
+		<res-sharing-scope>Shareable</res-sharing-scope> <injection-target> <injection-target-class>com.ibm.wssvt.acme.annuity.business.impl.ejb30mdb.AcmeAnnuityMgmtSvcEJB30MDBBean</injection-target-class> 
+		<injection-target-name>jmsConnFactory</injection-target-name> </injection-target> 
+		</resource-ref> -->
+	<!-- Added to use JMS Auth Alias defect 182104 -->
+	<resource-ref>
+		<res-ref-name>jms/ACMEAnnuityJMSConnectionFactory</res-ref-name>
+		<res-type>javax.jms.ConnectionFactory</res-type>
+		<res-auth>Container</res-auth>
+	</resource-ref>
+
+	<!-- <resource-env-ref> <resource-env-ref-name>jms/AcmeAnnuityMgmtSvcEJB30MDBQueue</resource-env-ref-name> 
+		<resource-env-ref-type>javax.jms.Queue</resource-env-ref-type> </resource-env-ref> -->
+</web-app>

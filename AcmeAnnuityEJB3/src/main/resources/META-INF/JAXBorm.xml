@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  $Rev: 539 $
+  $Date: 2007-07-17 17:44:35 -0500 (Tue, 17 Jul 2007) $
+  $Author: mohammad $
+  $LastChangedBy: mohammad $
+ -->
+ 
+<entity-mappings version="1.0" 
+	xmlns="http://java.sun.com/xml/ns/persistence/orm" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_1_0.xsd ">
+	
+	<package>com.ibm.wssvt.acme.annuity.common.bean.jaxbjpa</package>		
+	
+	<named-native-query name="GetPayorAnnuities" result-class="com.ibm.wssvt.acme.annuity.common.bean.jaxbjpa.Annuity">
+		<query>SELECT * FROM ANNUITY WHERE ID  IN (SELECT FK_ANNUITY_ID FROM ANNUITY_PAYOR WHERE FK_PAYOR_ID=?1)</query>
+	</named-native-query>	
+	
+</entity-mappings>

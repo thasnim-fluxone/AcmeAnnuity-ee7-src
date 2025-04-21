@@ -1,0 +1,51 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+<parent>
+        <groupId>net.wasdev.maven.parent</groupId>
+        <artifactId>parent</artifactId>
+        <version>1.4</version>
+</parent>
+
+  <groupId>AcmeAnnuityMaven</groupId>
+  <artifactId>acme-ee7</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+<properties>
+  <java.version>8</java.version>
+  <maven.compiler.source>8</maven.compiler.source>
+  <maven.compiler.target>8</maven.compiler.target>
+</properties>
+
+<!-- Commenting on 02/07/2022
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  -->
+  <modules>
+  	<module>AcmeCommon</module>
+  	<module>AcmeAnnuityCommon</module>
+  	<module>AcmeAnnuityJAXRSCommon</module>
+  	<module>AcmeAnnuityEJB3</module>
+  	<module>AcmeAnnuityEJB3JAXWS</module>
+  	<module>AcmeAnnuityEJB3JAXWS_CDI</module>
+  	<module>AcmeAnnuityEJB3MDB</module>
+  	<module>AcmeAnnuityJAXRSWSes_jaxrs11_m1</module>
+  	<module>AcmeAnnuityJAXRSWSes_jaxrs11_m2</module>
+  	<module>AcmeAnnuityJAXRSWSes_jaxrs20</module>
+  	<module>AcmeAnnuityPojoWSes</module>
+  	<module>AcmeAnnuityWeb</module>  	
+  	<module>AcmeWebEjbEar</module>
+  </modules>
+</project>

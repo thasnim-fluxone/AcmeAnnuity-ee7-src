@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<webservices-bnd xmlns="http://websphere.ibm.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:jee="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://websphere.ibm.com/xml/ns/javaee http://websphere.ibm.com/xml/ns/javaee/ibm-ws-bnd_1_0.xsd"
+	version="1.0">
+ 
+	<webservice-endpoint port-component-name="AnnuityMgmtSvcPojoJAXWS" address="/AnnuityMgmtSvcPojoJAXWSUpdated"/>
+	<http-publishing>
+		<webservice-security>
+			<security-role>
+				<role-name>admins</role-name>
+			</security-role>
+			<security-constraint>				
+				<display-name>CustomAnnuityPojoWSes</display-name>
+				<web-resource-collection>
+					<web-resource-name>pojoWSRes</web-resource-name>
+					<url-pattern>/AnnuityMgmtSvcPojoJAXWSUpdated</url-pattern>
+					<http-method>GET</http-method>
+					<http-method>POST</http-method>
+					<http-method>DELETE</http-method>
+					<http-method>PUT</http-method>
+				</web-resource-collection>
+				<auth-constraint>
+					<role-name>admins</role-name>
+				</auth-constraint>
+			</security-constraint>			
+		</webservice-security>
+	</http-publishing>
+</webservices-bnd>

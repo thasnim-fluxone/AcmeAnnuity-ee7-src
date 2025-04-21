@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<webservices-bnd xmlns="http://websphere.ibm.com/xml/ns/javaee" 
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xmlns:jee="http://java.sun.com/xml/ns/javaee"  
+                 xsi:schemaLocation="http://websphere.ibm.com/xml/ns/javaee http://websphere.ibm.com/xml/ns/javaee/ibm-ws-bnd_1_0.xsd"
+                 version="1.0">                  
+                                    
+                 <service-ref
+                 	name="services/AnnuityMgmtSvcPojoJAXWSImpl"                 	 
+                 	wsdl-location="wsdl/AnnuityMgmtSvcPojoJAXWSImplCopy.wsdl">
+                 	 
+                 	<port name="AnnuityMgmtSvcPojoJAXWSImplPort" namespace="http://jaxws.client.common.annuity.acme.wssvt.ibm.com/pojoimpl/"
+                 	username="persona1"
+					password="ppersona1"                	
+                 	/>
+                 </service-ref>
+
+
+</webservices-bnd>

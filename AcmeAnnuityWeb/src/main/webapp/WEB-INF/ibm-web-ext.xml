@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-ext xmlns="http://websphere.ibm.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://websphere.ibm.com/xml/ns/javaee http://websphere.ibm.com/xml/ns/javaee/ibm-web-ext_1_0.xsd"
+	version="1.0">
+
+	<context-root uri="AcmeAnnuityWeb" />
+	<auto-encode-requests value="true"/>
+	<auto-encode-responses value="true"/>
+	<enable-directory-browsing value="true"/>
+	<enable-file-serving value="true"/>
+	<enable-reloading value="true"/>
+	<enable-serving-servlets-by-class-name value="true"/>
+  
+<!--
+	metadata-complete="true">
+ 
+	<servlet name="TestServlet">
+		<local-transaction boundary="ACTIVITY_SESSION" resolver="APPLICATION" unresolved-action="ROLLBACK"/>
+		<global-transaction send-wsat-context="true" transaction-time-out="100"/>
+		<web-global-transaction execute-using-wsat="true" />
+		<markup-language name="lang1" mime-type="text/plain" error-page="MyErrorPage">
+			<page name="page1" uri="foo/page1"/>
+			<page name="MyErrorPage" uri="foo/error"/>
+		</markup-language>
+	</servlet>
+
+	<additional-classpath path="foo;bar"/>
+
+	<default-error-page uri="foo/bar/error.jsp"/>
+	
+	<file-serving-attribute name="foo" value="bar"/>
+	<file-serving-attribute name="zap" value="work"/>
+
+	<invoker-attribute name="" value=""/>
+
+	<jsp-attribute name="foo" value="bar"/>
+
+	<mime-filter mime-type="text/plain" target="foo/bar"/>
+
+	<reload-interval value="0"/>
+
+	<resource-ref name="ejbs/ejb/S01" connection-management-policy="DEFAULT" isolation-level="TRANSACTION_NONE"/>
+
+	<servlet-cache-config properties-group-name="foo">
+		<servlet name="foo"/>
+		<servlet name="bar"/>
+		<id-generation-properties use-uri="true">
+			<cache-variable required="true" type="REQUEST_PARAMETER" method="foo" />
+			<cache-variable required="false" type="SESSION_PARAMETER" identifier="foobar"/>
+		</id-generation-properties>
+	</servlet-cache-config>
+
+	<auto-encode-requests value="true"/>
+	<auto-encode-responses value="true"/>
+	<enable-directory-browsing value="true"/>
+	<enable-file-serving value="true"/>
+	<enable-reloading value="true"/>
+	<enable-serving-servlets-by-class-name value="true"/>
+-->
+</web-ext>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<application-bnd xmlns="http://websphere.ibm.com/xml/ns/javaee"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://websphere.ibm.com/xml/ns/javaee http://websphere.ibm.com/xml/ns/javaee/ibm-application-bnd_1_0.xsd"
+		version="1.0">
+  
+	<security-role name="admins">
+		<user name="acmemgr1"/>
+		<group name="group1"/>
+		<group name="group3"/>
+	</security-role>
+
+	<security-role name="users">
+		<user name="acmemgr3" />
+		<group name="group2"/>
+		<group name="group3"/>
+	</security-role>
+	
+<!--
+	<security-role name="DeclaredRole01">
+		<user name="user3" access-id="user:TheRealm/user3"/>
+		<user name="user1"/>
+		<group name="group2" access-id="group:TheRealm/group2"/>
+	</security-role>
+
+	<security-role name="Developer">
+		<user name="user3" access-id="user:TheRealm/user3"/>
+		<group name="group2" access-id="group:TheRealm/group2"/>
+	</security-role>
+	
+	<security-role name="user">
+		<user name="user2"/>
+		<group name="group3"/>
+	</security-role>
+-->	
+
+<!--  
+	 <security-role name="Person">
+    <special-subject type="ALL_AUTHENTICATED_USERS"/>
+  </security-role>
+  -->
+</application-bnd>

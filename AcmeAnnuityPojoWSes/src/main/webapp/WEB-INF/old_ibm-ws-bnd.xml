@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<webservices-bnd xmlns="http://websphere.ibm.com/xml/ns/javaee" 
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xmlns:jee="http://java.sun.com/xml/ns/javaee"  
+                 xsi:schemaLocation="http://websphere.ibm.com/xml/ns/javaee http://websphere.ibm.com/xml/ns/javaee/ibm-ws-bnd_1_0.xsd"
+                 version="1.0">
+ 	 
+	<webservice-endpoint port-component-name="AnnuityMgmtSvcPojoJAXWS" address="/AnnuityMgmtSvcPojoJAXWSUpdated"/>
+		<!-- 
+	  <http-publishing>
+                 	<webservice-security>
+                 		<security-role>
+                 			<jee:role-name>admins</jee:role-name>
+                 		</security-role>
+                 		<security-constraint>
+                 			<jee:web-resource-collection>
+                 				<jee:web-resource-name>
+                 					AnnuityPojoWSRsr
+                 				</jee:web-resource-name>
+                 				<jee:url-pattern>/*</jee:url-pattern>
+                 			</jee:web-resource-collection>
+                 		</security-constraint>
+                 		<login-config>
+                 			<jee:auth-method>BASIC</jee:auth-method>
+                 		</login-config>
+                 	</webservice-security>
+                 </http-publishing>
+       
+        <http-publishing>
+                 	<webservice-security>
+                 		<security-role>
+                 			<role-name>admins</role-name>
+                 		</security-role>
+                 		<security-constraint>
+                 			<web-resource-collection>
+                 				<web-resource-name>
+                 					AnnuityPojoWSRsr
+                 				</web-resource-name>
+                 				<url-pattern>/*</url-pattern>
+                 			</web-resource-collection>
+                 		</security-constraint>
+                 		<login-config>
+                 			<auth-method>BASIC</auth-method>
+                 		</login-config>
+                 	</webservice-security>
+                 </http-publishing>
+                 -->
+                  
+</webservices-bnd>
+

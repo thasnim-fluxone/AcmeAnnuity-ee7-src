@@ -1,0 +1,75 @@
+# Copied over from https://github.ibm.com/was-svt/nest-ops/blob/main/apps/openldap/svt-ldap.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: svt-openldap
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+  labels:
+    app: svt-openldap
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: svt-openldap
+      deployment: svt-openldap
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: svt-openldap
+        deployment: svt-openldap
+    spec:
+      containers:
+        - resources: {}
+          env:
+            - name: BITNAMI_DEBUG
+              value: 'false'
+            - name: LDAP_ENABLE_TLS
+              value: 'yes'
+          terminationMessagePath: /dev/termination-log
+          name: svt-openldap
+          #command: ['bash','-c','./svt-ldapadd.sh']
+          securityContext:
+            capabilities:
+            privileged: false
+            readOnlyRootFilesystem: false
+            allowPrivilegeEscalation: true
+          ports:
+            - containerPort: 9389
+              protocol: TCP
+            - containerPort: 9636
+              protocol: TCP
+          imagePullPolicy: Always
+          terminationMessagePolicy: File
+          #image: na.artifactory.swg-devops.com/hyc-wassvt-team-image-registry-docker-local/svt-openldap/svt-openldap:latest
+          image: libr-proxy1.fyre.ibm.com:5003/docker-registry-svt/v2/svt-openldap/svt-openldap:latest
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      schedulerName: default-scheduler
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: svt-openldap
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+  labels:
+    app: svt-openldap
+spec:
+  ports:
+    - name: 9389-tcp
+      protocol: TCP
+      port: 9389
+      targetPort: 9389
+    - name: 9636-tcp
+      protocol: TCP
+      port: 9636
+      targetPort: 9636
+  selector:
+    app: svt-openldap
+    deployment: svt-openldap
+  type: ClusterIP
+  sessionAffinity: None

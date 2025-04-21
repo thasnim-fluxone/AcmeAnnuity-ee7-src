@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ws:webservices-bnd xmlns:ws="http://websphere.ibm.com/xml/ns/javaee"
+                 xmlns:xml="http://www.w3.org/XML/1998/namespace" 
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:schemaLocation="http://websphere.ibm.com/xml/ns/javaee http://websphere.ibm.com/xml/ns/javaee/ibm-ws-bnd_1_0.xsd"
+                 version="1.0">
+ 	<ws:webservice-endpoint
+ 		port-component-name="AnnuityMgmtSvcPojoJAXWS"
+ 		address="/AnnuityMgmtSvcPojoJAXWSUpdated">
+ 		<ws:properties />
+ 	</ws:webservice-endpoint>
+ 	<ws:http-publishing>
+		<ws:webservice-security>			
+			<ws:security-constraint>
+				<ws:display-name>CustomAnnuityPojoWSes</ws:display-name>
+				<ws:web-resource-collection>
+					<ws:web-resource-name>
+						pojoWSRes
+					</ws:web-resource-name>
+					<ws:url-pattern>/AnnuityMgmtSvcPojoJAXWSUpdated</ws:url-pattern>
+					<ws:http-method>GET</ws:http-method>
+					<ws:http-method>POST</ws:http-method>
+					<ws:http-method>DELETE</ws:http-method>
+					<ws:http-method>PUT</ws:http-method>				
+					
+</ws:web-resource-collection>
+				<ws:auth-constraint>
+					<ws:role-name>admins</ws:role-name>
+				</ws:auth-constraint>
+			</ws:security-constraint>
+			<ws:security-role>
+				<ws:role-name>admins</ws:role-name>
+			</ws:security-role>
+		</ws:webservice-security>
+	</ws:http-publishing> 	
+</ws:webservices-bnd>

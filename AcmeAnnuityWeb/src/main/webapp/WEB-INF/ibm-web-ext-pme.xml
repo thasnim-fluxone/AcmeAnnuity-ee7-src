@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-ext-pme
+	xmlns="http://websphere.ibm.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://websphere.ibm.com/xml/ns/javaee http://websphere.ibm.com/xml/ns/javaee/ibm-web-ext-pme_1_0.xsd"
+	version="1.0">
+<!-- 
+	<app-profiles>
+		<servlet-component-extension servlet="TestServlet">
+			<task name="SomeTask"/>
+		</servlet-component-extension>
+
+		<servlet-component-extension servlet="TestServlet">
+			<task-ref logical-name="foo">
+				<task name="othertask"/>
+			</task-ref>
+			<task-ref logical-name="bar">
+				<task name="gorf"/>
+			</task-ref>
+		</servlet-component-extension>
+	</app-profiles>
+
+	<internationalization>
+	
+		<application>
+			<servlet name="Servlet1"/>
+			<servlet name="Servlet2"/>
+		</application>
+		
+		<run-as-caller>
+			<servlet name="Servlet3"/>
+			<servlet name="Servlet4"/>
+		</run-as-caller>
+		
+		<run-as-server>
+			<servlet name="Servlet5"/>
+			<servlet name="Servlet6"/>
+		</run-as-server>
+		
+		<run-as-specified name="NorthAmericanEnglish">
+			<locale lang="en" country="US" variant="foo" />
+			<locale lang="en" country="CA" variant="bar" />
+			<time-zone name="EST"/>
+			<servlet name="Servlet7"/>
+			<servlet name="Servlet8"/>
+		</run-as-specified>
+
+		<run-as-specified name="NorthAmericanFrench">
+			<locale lang="fr" country="US" variant="foo" />
+			<locale lang="fr" country="CA" variant="bar" />
+			<time-zone name="EST"/>
+			<servlet name="Servlet9"/>
+			<servlet name="Servlet10"/>
+		</run-as-specified>
+
+	</internationalization>	
+
+	<activity-sessions>
+		<servlet name="FooServlet" type="APPLICATION"/>
+		<servlet name="BarServlet" type="CONTAINER"/>
+		<servlet name="BazServlet" type="NONE"/>
+	</activity-sessions>
+
+	<compensation>
+		<servlet name="FooServlet" type="SUPPORTS" />
+		<servlet name="BarServlet" type="REQUIRED" />
+	</compensation>
+-->
+</web-ext-pme>

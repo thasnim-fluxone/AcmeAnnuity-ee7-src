@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  $Rev: 700 $
+  $Date: 2007-08-23 14:08:43 -0500 (Thu, 23 Aug 2007) $
+  $Author: mohammad $
+  $LastChangedBy: mohammad $
+ -->
+<!--  
+<entity-mappings version="1.0" 
+	xmlns="http://java.sun.com/xml/ns/persistence/orm" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_1_0.xsd ">
+  Changing version of orm.xml to be 2.1   
+--> 
+<entity-mappings version="2.1" 
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm orm_2_1.xsd ">
+		
+	<persistence-unit-metadata>
+        <persistence-unit-defaults>
+            <schema>EJB30</schema>
+        </persistence-unit-defaults>
+    </persistence-unit-metadata> 
+	
+	
+	<named-query name="GetHolderAnnuities">
+		<query>SELECT a FROM Annuity AS a WHERE a.annuityHolderId = :holderId</query>
+	</named-query>
+	
+	<named-query name="GetHolderPolicies">
+		<query>SELECT p FROM Policy AS p WHERE p.annuityHolderId = :holderId</query>
+	</named-query>
+	
+	<named-query name="GetHolderBeneficiaries">
+		<query>SELECT b FROM Beneficiary AS b WHERE b.annuityHolderId = :holderId</query>
+	</named-query>
+	
+	<named-query name="GetHolderBeneficiaryContactEmails">
+		<query>SELECT bc.email FROM BeneContact bc WHERE bc.beneficiary.annuityHolderId = :holderId ORDER BY bc.id.contactType, bc.email</query>
+	</named-query>
+	
+	<named-query name="GetFundIndexRateFromFundName">
+		<query>SELECT VALUE(f) FROM Policy p JOIN p.Funds f WHERE VALUE(f).fundName = :fName and p.annuityHolderId = :holderId</query>
+	</named-query>
+	
+	<named-query name="GetHolderFundsInState">
+		<query>SELECT VALUE(f) FROM Policy p, IN (p.Funds) f WHERE VALUE(f).theAddress.state = :state and p.annuityHolderId = :holderId</query>
+	</named-query>
+	
+	
+</entity-mappings>

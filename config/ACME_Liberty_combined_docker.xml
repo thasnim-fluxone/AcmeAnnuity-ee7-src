@@ -1,0 +1,714 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AcmeEnvConfig xmlns:ns2="http://common.acme.wssvt.ibm.com/envconfig/">
+  <GlobalConfigurationParams>
+  		<params>
+   			<entry><key>print.stats.interval</key><value>30</value></entry>
+			<entry><key>client.log.refresh</key><value>false</value></entry>
+			<entry><key>client.log.useParent</key><value>true</value></entry>
+			<entry><key>client.log.maxBytes</key><value>5120000</value></entry>
+			<entry><key>client.log.maxCount</key><value>100</value></entry>		
+			<entry><key>client.log.format</key><value>java.util.logging.SimpleFormatter</value></entry>
+			<entry><key>client.log.level</key><value>com.ibm.wssvt.acme.*=FINE</value></entry>						
+			<!-- <entry><key>client.log.level</key><value>com.ibm.wssvt.acme.*=INFO</value></entry> -->						
+			<entry><key>client.log.filePath</key><value>/logs/</value></entry>
+			<entry><key>client.log.filePattern</key><value>AnnuityClientLog%g.log</value></entry>
+
+			<entry><key>server.log.refresh</key><value>false</value></entry>
+			<entry><key>server.log.useParent</key><value>false</value></entry>
+			<entry><key>server.log.maxBytes</key><value>5120000</value></entry>
+			<entry><key>server.log.maxCount</key><value>100</value></entry>
+			<entry><key>server.log.format</key><value>java.util.logging.SimpleFormatter</value></entry>
+			<entry><key>server.log.level</key><value>com.ibm.wssvt.acme.*=INFO</value></entry>			
+			<entry><key>server.log.fileNamePattern</key><value>/logs/AnnuityServerLog%g.log</value></entry>			
+						
+		
+			<!-- For use with EJB30 for EJB_WS Adapter -->
+			<entry><key>connectionMode</key><value>remote</value></entry>
+			<!-- For tWAS 			
+			<entry><key>initialContextFactory</key><value>com.ibm.websphere.naming.WsnInitialContextFactory</value></entry> -->
+			<!-- For Liberty -->	
+			<entry><key>initialContextFactory</key><value>com.ibm.ws.jndi.iiop.InitialContextFactoryImpl</value></entry>
+								
+			<entry><key>iiopAddress</key><value>corbaloc:iiop:localhost:2814/NameService</value></entry>
+			
+			<entry><key>ejb2xRemoteHomeJNDI</key><value>com.ibm.wssvt.acme.annuity.common.business.ejb2x.AnnuityMgmtSvcEJB2x</value></entry>					
+			<entry><key>ejb2xLocalHomeJNDI</key><value>ejblocal:com.ibm.wssvt.acme.annuity.common.business.ejb2x.AnnuityMgmtSvcEJB2x</value></entry>		
+			
+			<entry><key>ejb3RemoteJNDI</key><value>java:global/AcmeWebEjbEar/AcmeAnnuityEJB3/AnnuityMgmtSvcEJB30Bean!com.ibm.wssvt.acme.annuity.common.business.ejb30.AnnuityMgmtSvcEJB30</value></entry>		
+			<entry><key>ejb3PolicyRemoteJNDI</key><value>java:global/AcmeWebEjbEar/AcmeAnnuityEJB3/PolicyMgmtSvcEJB30Bean!com.ibm.wssvt.acme.annuity.common.business.ejb30.policy.PolicyMgmtSvcEJB30</value></entry>	
+        	<entry><key>ejb3LocalJNDI</key><value>java:global/AcmeWebEjbEar/AcmeAnnuityEJB3/AnnuityMgmtSvcEJB30Bean!com.ibm.wssvt.acme.annuity.common.business.ejb30.AnnuityMgmtSvcEJB30Local</value></entry>
+		
+			<entry><key>ejb3JaxwsLocalJNDI</key><value>java:global/AcmeWebEjbEar/AcmeAnnuityEJB3JAXWS/AnnuityMgmtSvcEJB30JAXWSBean!com.ibm.wssvt.acme.annuity.common.business.ejbws.ejb3jaxws.AnnuityMgmtSvcEJB30JAXWSLocal</value></entry>		
+			<entry><key>ejb3JaxwsRemoteJNDI</key><value>java:global/AcmeWebEjbEar/AcmeAnnuityEJB3JAXWS/AnnuityMgmtSvcEJB30JAXWSBean!com.ibm.wssvt.acme.annuity.common.business.ejbws.ejb3jaxws.AnnuityMgmtSvcEJB30JAXWS</value></entry>		
+		    
+			<entry><key>persistenceType</key><value>JPA_EJB</value></entry>		
+			<entry><key>refreshJPAEMF</key><value>false</value></entry>  <!-- since this test mixes the cases from jpa to jaxbjpa, set to true! -->					
+			
+			<entry><key>jpaEjbLocalJndi</key><value>java:global/AcmeWebEjbEar/AcmeAnnuityEJB3/PersistenceJPASessionBean!com.ibm.wssvt.acme.annuity.persistence.impl.ejbjpa.PersistenceJPALocal</value></entry>
+			<entry><key>jpaPolicyEjbLocalJndi</key><value>java:global/AcmeWebEjbEar/AcmeAnnuityEJB3/PolicyPersistenceJPASessionBean!com.ibm.wssvt.acme.annuity.persistence.impl.ejbjpa.PolicyPersistenceJPALocal</value></entry>
+
+			<entry><key>javax.persistence.provider</key><value>com.ibm.websphere.persistence.PersistenceProviderImpl</value></entry>  
+            <!-- <entry><key>javax.persistence.provider</key><value>org.apache.openjpa.persistence.PersistenceProviderImpl</value></entry> -->    
+			
+			<!-- Derby 
+			<entry><key>openjpa.ConnectionDriverName</key><value>org.apache.derby.jdbc.ClientDriver</value></entry>
+			<entry><key>openjpa.ConnectionURL</key><value>jdbc:derby://9.3.41.214:1527/ANNUITY</value></entry>
+			<entry><key>openjpa.ConnectionUserName</key><value>test</value></entry>
+			<entry><key>openjpa.ConnectionPassword</key><value>a1x4meok</value></entry>
+			<entry><key>openjpa.jdbc.DBDictionary</key><value>derby</value></entry>
+			 End Derby -->
+			
+			<!-- Db2 -->
+			<entry><key>openjpa.ConnectionDriverName</key><value>com.ibm.db2.jcc.DB2Driver</value></entry>
+			<entry><key>openjpa.ConnectionURL</key><value>jdbc:db2://svt216.austin.ibm.com:50060/ANNUITY</value></entry>
+			<entry><key>openjpa.ConnectionUserName</key><value>huiran</value></entry>
+			<entry><key>openjpa.ConnectionPassword</key><value>a1x4meok</value></entry>
+			<entry><key>openjpa.jdbc.DBDictionary</key><value>db2</value></entry>
+			 <!-- End Db2--> 
+			
+				<!-- Oracle 
+			<entry><key>openjpa.ConnectionDriverName</key><value>oracle.jdbc.driver.OracleDriver</value></entry>
+			<entry><key>openjpa.ConnectionURL</key><value>jdbc:oracle:thin:@svtwin25.austin.ibm.com:1521:ejb30</value></entry>
+			<entry><key>openjpa.ConnectionUserName</key><value>ejb30</value></entry>
+			<entry><key>openjpa.ConnectionPassword</key><value>a1x4meok</value></entry>
+			<entry><key>openjpa.jdbc.DBDictionary</key><value>oracle</value></entry>
+                   -->   
+
+
+			<entry><key>openjpa.jdbc.Schema</key><value>EJB30</value></entry>	
+			<entry><key>waitTime</key><value>1000</value></entry>  <!--  wait 1 sec -->
+			<entry><key>waitCount</key><value>60</value></entry>   <!--  max wait will be 1 min, or 60 times 1 sec -->
+			
+			<entry><key>enableVerify</key><value>false</value></entry>
+						
+        </params>
+    </GlobalConfigurationParams>
+    
+	<ClientConfiguration threadCount="1" runTime="1" id="">
+		
+	</ClientConfiguration>
+		
+	
+	<Adapter id="1"	class="com.ibm.wssvt.acme.annuity.common.client.adapter.EJB30ServerAdapter">
+		<configuration>
+			<params>
+			<!-- Use for local Interface
+			<entry><key>connectionMode</key><value>injectionWithLocal</value></entry> -->
+			<!-- Use for Remote Interface -->
+				<entry><key>connectionMode</key><value>remote</value></entry>
+			</params>
+		</configuration>
+	</Adapter>
+
+	<Adapter id="4" class="com.ibm.wssvt.acme.annuity.common.client.adapter.policy.PolicyEJB30ServerAdapter">
+		<configuration>
+			<params>
+			<!--<entry><key>connectionMode</key><value>injectionWithLocal</value></entry> -->
+			<entry><key>connectionMode</key><value>remote</value></entry>
+			<entry><key>persistenceType</key><value>JPA_EJB</value></entry>
+			<entry><key>persistenceUnitName</key><value>PolicyDSJPAOnly</value></entry>
+		</params>
+	</configuration>
+  </Adapter>
+
+  <Adapter id="5" class="com.ibm.wssvt.acme.annuity.common.client.adapter.JAXWSServerAdapter">
+		<configuration>
+			<params>
+			<!--	<entry><key>jaxwsPojoServiceURL</key><value>https://aussvt206.rtp.raleigh.ibm.com:9443/AnnuityPojoWSes/AnnuityMgmtSvcPojoJAXWSUpdated</value></entry> -->				
+				<entry><key>jaxwsPojoServiceURL</key><value>https://localhost:9443/AnnuityPojoWSes/AnnuityMgmtSvcPojoJAXWSUpdated</value></entry>				
+				<entry><key>useAsync</key><value>false</value></entry>	
+				<entry><key>useWSCache</key><value>false</value></entry>		
+				<entry><key>connectionMode</key><value>useInjection</value></entry>
+			</params>
+		</configuration>
+	</Adapter>
+	
+	<Adapter id="6" class="com.ibm.wssvt.acme.annuity.common.client.adapter.JAXWSServerAdapter">
+		<configuration>
+			<params>
+				<!-- <entry><key>jaxwsPojoServiceURL</key><value>https://aussvt206.rtp.raleigh.ibm.com:9443/AnnuityPojoWSes/AnnuityMgmtSvcPojoJAXWSUpdated</value></entry>-->				
+				<entry><key>jaxwsPojoServiceURL</key><value>https://localhost:9443/AnnuityPojoWSes/AnnuityMgmtSvcPojoJAXWSUpdated</value></entry>				
+				<entry><key>useAsync</key><value>true</value></entry>	
+				<entry><key>useWSCache</key><value>false</value></entry>		
+				<entry><key>connectionMode</key><value>useInjection</value></entry>
+			</params>
+		</configuration>
+	</Adapter>
+
+
+	<Adapter id="8" class="com.ibm.wssvt.acme.annuity.common.client.adapter.EJB30JAXWSJAXWSServerAdapter">
+		<configuration>
+			<params>
+				<!--<entry><key>ejb30JaxwsServiceURL</key><value>https://aussvt206.rtp.raleigh.ibm.com:9443/AcmeAnnuityEJB3JAXWS/AnnuityMgmtSvcEJB30JAXWSImpl</value></entry>-->
+				<entry><key>ejb30JaxwsServiceURL</key><value>https://localhost:9443/AcmeAnnuityEJB3JAXWS/AnnuityMgmtSvcEJB30JAXWSImpl</value></entry>
+				<entry><key>useAsync</key><value>false</value></entry>
+				<entry><key>connectionMode</key><value>useInjection</value></entry>
+			</params>
+		</configuration>
+	</Adapter>  
+
+	<!-- This adapter is similar to Adapter 8, but uses CDI 1.2 Feature -->
+	<Adapter id="8.1" class="com.ibm.wssvt.acme.annuity.common.client.adapter.EJB30JAXWSJAXWSServerAdapter">
+		<configuration>
+			<params>
+			<!--	<entry><key>ejb30JaxwsServiceURL</key><value>https://aussvt206.rtp.raleigh.ibm.com:9443/AcmeAnnuityEJB3JAXWS_CDI/AnnuityMgmtSvcEJB30JAXWSImpl</value></entry> -->
+				<entry><key>ejb30JaxwsServiceURL</key><value>https://localhost:9443/AcmeAnnuityEJB3JAXWS_CDI/AnnuityMgmtSvcEJB30JAXWSImpl</value></entry>
+				<entry><key>useAsync</key><value>false</value></entry>
+				<entry><key>connectionMode</key><value>useInjection</value></entry>
+			</params>
+		</configuration>
+	</Adapter> 
+
+
+
+
+
+
+	<Adapter id="9" class="com.ibm.wssvt.acme.annuity.common.client.adapter.EJB30JAXWSEJBServerAdapter">
+		<configuration>
+			<params>
+				<entry><key>connectionMode</key><value>remote</value></entry>
+			</params>
+		</configuration>
+	</Adapter>
+
+	<!-- This adapter is used only for JPA Stand Alone (wihout using EJB) Since we do use persistence with EJB in current Liberty testing, no tests for this.
+	<Adapter id="10" class="com.ibm.wssvt.acme.annuity.common.client.adapter.JPASAAdapter">
+		<configuration>
+			<params>
+				<entry><key>persistenceType</key><value>JPA_SA</value></entry>
+			</params>
+		</configuration>
+	</Adapter>
+	-->
+	
+	<!-- Adapter for MDB/JMS. Lookup value changed to add java:comp/env - for JMS Auth Alias - defect 182104. This is for JMS 1.1 client -->
+	<Adapter id="11" class="com.ibm.wssvt.acme.annuity.common.client.adapter.EJB30MDBServerAdapter" >
+		<configuration>
+			<params>				
+				<entry><key>ACMEAnnuityJMSConnectionFactoryJNDI</key><value>java:comp/env/jms/ACMEAnnuityJMSConnectionFactory</value></entry>
+				<entry><key>AcmeAnnuityMgmtSvcEJB30MDBQueueJNDI</key><value>jms/AcmeAnnuityMgmtSvcEJB30MDBQueue</value></entry>				
+				<entry><key>consumerReceiveTimeout</key><value>300000</value></entry>
+			    <entry><key>JMS2.0</key><value>false</value></entry>
+				<entry><key>useJMSAsync</key><value>false</value></entry>
+			</params>
+		</configuration>
+	</Adapter>
+	
+	<!-- Adapter for MDB/JMS. Lookup value changed to add java:comp/env - for JMS Auth Alias - defect 182104. This is for JMS 2.0 Sync client with message delay -->
+	<Adapter id="12" class="com.ibm.wssvt.acme.annuity.common.client.adapter.EJB30MDBServerAdapter" >
+		<configuration>
+			<params>				
+				<entry><key>ACMEAnnuityJMSConnectionFactoryJNDI</key><value>java:comp/env/jms/ACMEAnnuityJMSConnectionFactory</value></entry>
+				<entry><key>AcmeAnnuityMgmtSvcEJB30MDBQueueJNDI</key><value>jms/AcmeAnnuityMgmtSvcEJB30MDBQueue</value></entry>				
+				<entry><key>consumerReceiveTimeout</key><value>300000</value></entry>	
+				<entry><key>JMS2.0</key><value>true</value></entry>
+				<entry><key>useJMSAsync</key><value>false</value></entry>
+				<entry><key>messageDelay</key><value>400</value></entry>
+			</params>
+		</configuration>
+	</Adapter>	
+
+
+        <!--JAX-RS 1.1 Client to JAX-RS 1.1 server with JSON payload. Has SSL Enabled -->
+	<Adapter id="16" class="com.ibm.wssvt.acme.annuity.common.client.adapter.JAXRSServerAdapter" >
+		<configuration>
+			<params>
+			
+				<entry><key>serverURL</key><value>https://localhost:9443/AnnuityJAXRS11M1/annuity/jaxrs</value></entry>
+				<entry><key>contentType</key><value>JSON</value></entry>
+				<!-- <entry><key>useSSL</key><value>false</value></entry> -->
+				<entry><key>useSSL</key><value>true</value></entry>
+				<entry><key>useSecurity</key><value>BASIC_AUTH</value></entry>				
+				<entry><key>userName</key><value>persona1</value></entry>								
+				<entry><key>userPassword</key><value>ppersona1</value></entry>
+				<entry><key>useApacheClient</key><value>false</value></entry>
+			</params>
+		</configuration>
+	</Adapter>
+
+	<!-- JAX-RS 1.1 Client to JAX-RS 1.1 server with JAXB payload. Has SSL Enabled -->
+	<Adapter id="17" class="com.ibm.wssvt.acme.annuity.common.client.adapter.JAXRSServerAdapter" >
+		<configuration>
+			<params>
+				<entry><key>serverURL</key><value>https://localhost:9443/AnnuityJAXRS11M2/annuity/jaxrs</value></entry>				
+				<entry><key>contentType</key><value>JAXB</value></entry>
+				<entry><key>useSSL</key><value>true</value></entry>
+				<entry><key>useSecurity</key><value>BASIC_AUTH</value></entry>				
+				<entry><key>userName</key><value>persona1</value></entry>								
+				<entry><key>userPassword</key><value>ppersona1</value></entry>
+				<entry><key>useApacheClient</key><value>false</value></entry>
+			</params>
+		</configuration>
+	</Adapter>
+	
+	<!--JAX-RS 2.0 Sync Client tests JAX-RS 1.1 Server. Has SSL Enabled -->
+	<Adapter id="18" class="com.ibm.wssvt.acme.annuity.common.client.adapter.JAXRS20ServerAdapter">
+		<configuration>
+			<params>
+			    <entry><key>serverURL</key><value>https://localhost:9443/AnnuityJAXRS11M1/annuity/jaxrs</value></entry>
+				<entry><key>contentType</key><value>JAXB</value></entry>
+				<!--<entry><key>contentType</key><value>ATOM</value></entry>-->
+				<!--<entry><key>contentType</key><value>JSON</value></entry>-->
+				<!--<entry><key>useSecurity</key><value>NONE</value></entry>-->
+				<entry><key>useSecurity</key><value>BASIC_AUTH</value></entry>
+				<entry><key>useSSL</key><value>true</value></entry>
+				<entry><key>userName</key><value>persona1</value></entry>								
+				<entry><key>userPassword</key><value>ppersona1</value></entry>
+				<entry><key>useApacheClient</key><value>true</value></entry>	
+				<entry><key>useAsync</key><value>false</value></entry>
+				<entry><key>sslRefId</key><value>defaultSSLConfig</value></entry>
+				<!--<entry><key>supportedClientAuthenticationSSLConfig</value></entry> mySSLRefId is the ssl ref id in Liberty server.xml -->
+				<entry><key>readTimeout</key><value>600000</value></entry>
+			</params>
+		</configuration>
+	</Adapter>
+	
+	<!--JAX-RS 2.0 Sync Client tests JAX-RS 2.0 server. Has SSL Enabled -->
+	<Adapter id="19" class="com.ibm.wssvt.acme.annuity.common.client.adapter.JAXRS20ServerAdapter">
+		<configuration>
+			<params>
+				<entry><key>serverURL</key><value>https://localhost:9443/AnnuityJAXRS20/annuity/jaxrs20</value></entry>
+				<entry><key>contentType</key><value>JAXB</value></entry>
+				<!--<entry><key>contentType</key><value>ATOM</value></entry>-->
+				<!--<entry><key>contentType</key><value>JSON</value></entry>-->
+				<!--<entry><key>useSecurity</key><value>NONE</value></entry>-->
+				<entry><key>useSecurity</key><value>BASIC_AUTH</value></entry>
+				<entry><key>useSSL</key><value>true</value></entry>
+				<entry><key>userName</key><value>persona1</value></entry>								
+				<entry><key>userPassword</key><value>ppersona1</value></entry>
+				<entry><key>useApacheClient</key><value>true</value></entry>	
+				<entry><key>useAsync</key><value>false</value></entry>
+				<entry><key>sslRefId</key><value>defaultSSLConfig</value></entry> <!--mySSLRefId is the ssl ref id in Liberty server.xml -->
+				<entry><key>readTimeout</key><value>600000</value></entry>
+			</params>
+		</configuration>
+	</Adapter>
+	
+	<!--JAX-RS 2.0 Async Client tests JAX-RS 2.0 Server. Has SSL Enabled -->
+	<Adapter id="20" class="com.ibm.wssvt.acme.annuity.common.client.adapter.JAXRS20ServerAdapter">
+		<configuration>
+			<params>
+				<entry><key>serverURL</key><value>https://localhost:9443/AnnuityJAXRS20/annuity/jaxrs20Async</value></entry>
+				<entry><key>contentType</key><value>JAXB</value></entry>
+				<!--<entry><key>useSecurity</key><value>NONE</value></entry>-->
+				<entry><key>useSecurity</key><value>BASIC_AUTH</value></entry>
+				<entry><key>useSSL</key><value>true</value></entry>
+				<entry><key>userName</key><value>persona1</value></entry>								
+				<entry><key>userPassword</key><value>ppersona1</value></entry>
+				<entry><key>useApacheClient</key><value>true</value></entry>	
+				<entry><key>useAsync</key><value>true</value></entry>
+				<entry><key>waitTime</key><value>1000</value></entry>
+				<entry><key>waitCount</key><value>120</value></entry>
+				<entry><key>sslRefId</key><value>defaultSSLConfig</value></entry> <!--mySSLRefId is the ssl ref id in Liberty server.xml -->				
+				<!--<entry><key>sleep_time_in_ms</key><value>1000</value></entry>-->
+				<!--<entry><key>timeout_in_sec</key><value>20</value></entry>-->
+			</params>
+		</configuration>
+	</Adapter>
+
+
+
+	
+<ExecutionUnit class="com.ibm.wssvt.acme.annuity.common.client.executionunit.specialunit.quickreturn.CRUDContactQuickReturnSEU" 
+    	adapterId="1" 
+    	repeat="1" 
+		beansFactoryClass="com.ibm.wssvt.acme.annuity.common.bean.jaxbjpa.JAXBJPABeansFactory"		
+    	description="1.1. CRUDContactQuickReturnSEU">
+       <configuration>
+			<params/>
+		</configuration>
+    </ExecutionUnit>
+    
+    <ExecutionUnit class="com.ibm.wssvt.acme.annuity.common.client.executionunit.CRUDContactEU" 
+    	adapterId="1" 
+    	repeat="1" 		
+		beansFactoryClass="com.ibm.wssvt.acme.annuity.common.bean.jpa.JPABeansFactory"
+    	description="1.2 - CRUD Contact using JPA">
+       <configuration>
+			<params>
+				<entry><key>persistenceType</key><value>JPA_EJB</value></entry>
+				 
+			</params>
+		</configuration>
+    </ExecutionUnit>
+	
+	<ExecutionUnit class="com.ibm.wssvt.acme.annuity.common.client.executionunit.CRUDHolderEU" 
+    	adapterId="1" 
+    	repeat="1" 		
+		beansFactoryClass="com.ibm.wssvt.acme.annuity.common.bean.jaxbjpa.JAXBJPABeansFactory"
+    	description="1.3 - CRUD Holder using JAXB_JPA">
+       <configuration>
+			<params>
+				<entry><key>persistenceType</key><value>JPA_EJB</value></entry>
+				 
+			</params>
+		</configuration>
+    </ExecutionUnit>
+
+<!-- Comment out for ee10
+	<ExecutionUnit class="com.ibm.wssvt.acme.annuity.common.client.executionunit.CRUDAnnuityRiderPayoutPayorEU" 
+    	adapterId="1" 
+    	repeat="1" 		
+		beansFactoryClass="com.ibm.wssvt.acme.annuity.common.bean.jpa.JPABeansFactory"
+    	description="1.4 - CRUDAnnuityRiderPayoutPayorEU using JPA">
+       <configuration>
+			<params>
+				<entry><key>persistenceType</key><value>JPA_EJB</value></entry>
+			</params>
+		</configuration>
+    </ExecutionUnit>
+-->
+	
+	<ExecutionUnit class="com.ibm.wssvt.acme.annuity.common.client.executionunit.policy.CRUDPolicyEU" 
+		adapterId="4" 
+		repeat="1" 
+		beansFactoryClass="com.ibm.wssvt.acme.annuity.common.bean.jpa.JPABeansFactory" 
+		description="4.1 CRUD Policy">
+		<configuration>
+			<params>
+				<entry><key>persistenceType</key> <value>JPA_EJB</value></entry>
+				<entry><key>persistenceUnitName</key><value>PolicyDSJPAOnly</value></entry>
+			</params>
+		</configuration>
+	</ExecutionUnit>
+
+	<ExecutionUnit class="com.ibm.wssvt.acme.annuity.common.client.executionunit.policy.CRUDBeneficiaryWithBeneContactEU" 
+		adapterId="4" 
+		repeat="1" 
+		beansFactoryClass="com.ibm.wssvt.acme.annuity.common.bean.jpa.JPABeansFactory" 
+		description="4.2 CRUD Beneficiary with BeneContact">
+		<configuration>
+			<params>
+				<entry><key>persistenceType</key><value>JPA_EJB</value></entry>
+				<entry><key>persistenceUnitName</key><value>PolicyDSJPAOnly</value></entry>
+			</params>
+		</configuration>
+	</ExecutionUnit>
+
+	<!-- For all Read EUs (EU 4.3 till EU 4.7), the Database has to be populated for these tests to run successfully -->
+	<ExecutionUnit class="com.ibm.wssvt.acme.annuity.common.client.executionunit.policy.ReadPolicyFromHolderEU" 
+	adapterId="4" 
+	beansFactoryClass="com.ibm.wssvt.acme.annuity.common.bean.jpa.JPABeansFactory" repeat="1" 
+	description="4.3 Read Policy From Holder - JPQL">
+        <configuration>
+            <params>
+				<entry><key>persistenceType</key><value>JPA_EJB</value></entry>
+				<entry><key>persistenceUnitName</key><value>PolicyDSJPAOnly</value></entry>			
+            	<entry><key>maxId</key><value>124999</value></entry>
+                <entry><key>startId</key><value>100000</value></entry>
+				<entry><key>queryType</key><value>JPQL</value></entry>
+            </params>
+        </configuration>
+    </ExecutionUnit>
+	
+ <!-- Read the Policy from Holder using Stored Procedure for JPA 2.1 -->
+ <ExecutionUnit class="com.ibm.wssvt.acme.annuity.common.client.executionunit.policy.ReadPolicyFromHolderEU" 
+	adapterId="4" 
+	beansFactoryClass="com.ibm.wssvt.acme.annuity.common.bean.jpa.JPABeansFactory" repeat="1" 
+	description="4.4 Read Policy From Holder - Stored Procedure">
+        <configuration>
+            <params>
+				<entry><key>persistenceType</key><value>JPA_EJB</value></entry>
+				<entry><key>persistenceUnitName</key><value>PolicyDSJPAOnly</value></entry>			
+            	<entry><key>maxId</key><value>124999</value></entry>
+                <entry><key>startId</key><value>100000</value></entry>
+				<entry><key>queryType</key><value>stored</value></entry>
+            </params>
+        </configuration>
+    </ExecutionUnit>
+	
+	<ExecutionUnit class="com.ibm.wssvt.acme.annuity.common.client.executionunit.policy.ReadBeneficiaryFromHolderEU" 
+	adapterId="4" 
+	beansFactoryClass="com.ibm.wssvt.acme.annuity.common.bean.jpa.JPABeansFactory" repeat="1" 
+	description="4.5 Read Beneficiary From Holder - JPQL">
+        <configuration>
+            <params>
+				<entry><key>persistenceType</key><value>JPA_EJB</value></entry>
+				<entry><key>persistenceUnitName</key><value>PolicyDSJPAOnly</value></entry>			
+            	<entry><key>maxId</key><value>124999</value></entry>
+                <entry><key>startId</key><value>100000</value></entry>
+				<entry><key>queryType</key><value>JPQL</value></entry>
+            </params>
+        </configuration>
+    </ExecutionUnit>
+
+	<!-- Read the Beneficiary from Holder using Stored Procedure for JPA 2.1 -->	
+	<ExecutionUnit class="com.ibm.wssvt.acme.annuity.common.client.executionunit.policy.ReadBeneficiaryFromHolderEU" 
+	adapterId="4" 
+	beansFactoryClass="com.ibm.wssvt.acme.annuity.common.bean.jpa.JPABeansFactory" repeat="1" 
+	description="4.6 Read BeneficiaryFrom Holder - Stored Procedure">
+        <configuration>
+            <params>
+				<entry><key>persistenceType</key><value>JPA_EJB</value></entry>
+				<entry><key>persistenceUnitName</key><value>PolicyDSJPAOnly</value></entry>			
+            	<entry><key>maxId</key><value>124999</value></entry>
+                <entry><key>startId</key><value>100000</value></entry>
+				<entry><key>queryType</key><value>stored</value></entry>
+            </params>
+        </configuration>
+    </ExecutionUnit>
+
+	<ExecutionUnit class="com.ibm.wssvt.acme.annuity.common.client.executionunit.policy.ReadBeneficiaryContactEmailFromHolderEU" 
+	adapterId="4" beansFactoryClass="com.ibm.wssvt.acme.annuity.common.bean.jpa.JPABeansFactory" repeat="1" 
+	description="4.7 Read Beneficiary Contact Email From Holder - Criteria query">
+        <configuration>
+            <params>
+				<entry><key>persistenceType</key><value>JPA_EJB</value></entry>
+				<entry><key>persistenceUnitName</key><value>PolicyDSJPAOnly</value></entry>				
+            	<entry><key>maxId</key><value>124999</value></entry>
+                <entry><key>startId</key><value>100000</value></entry>
+				<entry><key>queryType</key><value>criteria</value></entry>
+            </params>
+        </configuration>
+    </ExecutionUnit>
+	
+	<ExecutionUnit class="com.ibm.wssvt.acme.annuity.common.client.executionunit.policy.ReadPolicyFundFromFundNameAndHolderEU" 
+	adapterId="4" beansFactoryClass="com.ibm.wssvt.acme.annuity.common.bean.jpa.JPABeansFactory" repeat="1" 
+	description="4.8 Read PolicyFund From Fund Name And Holder - JPQL query">
+        <configuration>
+            <params>
+				<entry><key>persistenceType</key><value>JPA_EJB</value></entry>
+				<entry><key>persistenceUnitName</key><value>PolicyDSJPAOnly</value></entry>				
+            	<entry><key>maxId</key><value>124999</value></entry>
+                <entry><key>startId</key><value>100000</value></entry>
+				<entry><key>queryType</key><value>JPQL</value></entry>
+            </params>
+        </configuration>
+    </ExecutionUnit>
+<!-- Comment out JAX-WS tests		
+<ExecutionUnit class="com.ibm.wssvt.acme.annuity.common.client.executionunit.specialunit.quickreturn.CRUDContactQuickReturnSEU" 
+		adapterId="5" 
+		beansFactoryClass="com.ibm.wssvt.acme.annuity.common.bean.jaxbjpa.JAXBJPABeansFactory" 
+		repeat="1" 
+		description="5.1 CRUDContactQuickReturn">
+        <configuration>
+            <params/>
+        </configuration>
+    </ExecutionUnit>
+-->
+<!-- EU 5.2, 6.2, 8.2 and 8.1.2 (All CRUD EU's with DB and in WS) generate a lot of logs - defect 185163. Comment out when running stress 
+	<ExecutionUnit class="com.ibm.wssvt.acme.annuity.common.client.executionunit.CRUDContactEU" 
+    	adapterId="5" 
+    	repeat="1" 		
+		beansFactoryClass="com.ibm.wssvt.acme.annuity.common.bean.jaxbjpa.JAXBJPABeansFactory" 
+    	description="5.2 - CRUD Contact using JPA">		
+    </ExecutionUnit>
+	
+
+	<ExecutionUnit class="com.ibm.wssvt.acme.annuity.common.client.executionunit.specialunit.quickreturn.CRUDContactQuickReturnSEU" 
+		adapterId="6" 
+		beansFactoryClass="com.ibm.wssvt.acme.annuity.common.bean.jaxbjpa.JAXBJPABeansFactory" 
+		repeat="1" 
+		description="6.1 CRUDContactQuickReturn">
+        <configuration>
+            <params/>
+        </configuration>
+    </ExecutionUnit>
+	
+
+	<ExecutionUnit class="com.ibm.wssvt.acme.annuity.common.client.executionunit.CRUDHolderEU" 
+    	adapterId="6" 
+    	repeat="1" 		
+		beansFactoryClass="com.ibm.wssvt.acme.annuity.common.bean.jaxbjpa.JAXBJPABeansFactory" 
+    	description="6.2 - CRUD Holder using JPA">		
+    </ExecutionUnit>
+ 
+
+    <ExecutionUnit class="com.ibm.wssvt.acme.annuity.common.client.executionunit.specialunit.quickreturn.CRUDContactQuickReturnSEU" 
+    	adapterId="8" 
+    	repeat="1" 
+		beansFactoryClass="com.ibm.wssvt.acme.annuity.common.bean.jaxbjpa.JAXBJPABeansFactory"		
+    	description="8.1. CRUDContactQuickReturnSEU with EjB_Ws">
+       <configuration>
+			<params/>
+		</configuration>
+    </ExecutionUnit>
+-->
+<!--
+
+	<ExecutionUnit class="com.ibm.wssvt.acme.annuity.common.client.executionunit.CRUDContactEU" 
+    	adapterId="8" 
+    	repeat="1" 		
+		beansFactoryClass="com.ibm.wssvt.acme.annuity.common.bean.jaxbjpa.JAXBJPABeansFactory"
+    	description="8.2 - CRUD Contact using EjB_Ws">
+       <configuration>
+			<params>
+				<entry><key>persistenceType</key><value>JPA_EJB</value></entry>			 
+			</params>
+		</configuration>
+    </ExecutionUnit>
+-->	
+	
+<!--	<ExecutionUnit class="com.ibm.wssvt.acme.annuity.common.client.executionunit.specialunit.quickreturn.CRUDContactQuickReturnSEU"
+        adapterId="8.1"
+        repeat="1"
+        beansFactoryClass="com.ibm.wssvt.acme.annuity.common.bean.jaxbjpa.JAXBJPABeansFactory"
+        description="8.1.1 CRUDContactQuickReturnSEU with EjB_Ws_CDI">
+       <configuration>
+			<params/>
+       </configuration>
+    </ExecutionUnit>
+
+
+    <ExecutionUnit class="com.ibm.wssvt.acme.annuity.common.client.executionunit.CRUDHolderEU"
+        adapterId="8.1"
+        repeat="1"
+        beansFactoryClass="com.ibm.wssvt.acme.annuity.common.bean.jaxbjpa.JAXBJPABeansFactory"
+        description="8.1.2 - CRUD Holder using EjB_Ws_CDI">
+       <configuration>
+             <params>
+                  <entry><key>persistenceType</key><value>JPA_EJB</value></entry>
+             </params>
+       </configuration>
+    </ExecutionUnit> 
+
+-->
+
+
+
+
+     <ExecutionUnit class="com.ibm.wssvt.acme.annuity.common.client.executionunit.CRUDHolderEU" 
+    	adapterId="9" 
+    	repeat="1" 		
+		beansFactoryClass="com.ibm.wssvt.acme.annuity.common.bean.jaxbjpa.JAXBJPABeansFactory"
+    	description="9.1 - CRUD Holder using EjB_Ws adapter as an EJB">
+       <configuration>
+			<params>
+				<entry><key>persistenceType</key><value>JPA_EJB</value></entry>
+				 
+			</params>
+		</configuration>
+    </ExecutionUnit>
+
+	<ExecutionUnit class="com.ibm.wssvt.acme.annuity.common.client.executionunit.specialunit.quickreturn.CRUDAnnuityHolderQuickReturnSEU" 
+    	adapterId="11" 
+    	repeat="1" 
+		beansFactoryClass="com.ibm.wssvt.acme.annuity.common.bean.jaxbjpa.JAXBJPABeansFactory"		
+    	description="11.1 CRUDAnnuityHolderQuickReturnSEU with MDB">
+       <configuration>
+			<params/>
+		</configuration>
+    </ExecutionUnit>
+
+
+	<ExecutionUnit class="com.ibm.wssvt.acme.annuity.common.client.executionunit.CRUDContactEU" 
+    	adapterId="11" 
+    	repeat="1" 		
+		beansFactoryClass="com.ibm.wssvt.acme.annuity.common.bean.jpa.JPABeansFactory"
+    	description="11.2 - CRUD Contact using MDB">
+       <configuration>
+			<params>
+				<entry><key>persistenceType</key><value>JPA_EJB</value></entry>
+				 
+			</params>
+		</configuration>
+    </ExecutionUnit>
+	
+
+	<ExecutionUnit class="com.ibm.wssvt.acme.annuity.common.client.executionunit.specialunit.quickreturn.CRUDContactQuickReturnSEU" 
+    	adapterId="12" 
+    	repeat="1" 
+		beansFactoryClass="com.ibm.wssvt.acme.annuity.common.bean.jpa.JPABeansFactory"		
+    	description="12.1 CRUDContactQuickReturnSEU with MDB and JMS2.0">
+       <configuration>
+			<params/>
+		</configuration>
+    </ExecutionUnit>
+	
+	<ExecutionUnit class="com.ibm.wssvt.acme.annuity.common.client.executionunit.CRUDContactEU" 
+    	adapterId="12" 
+    	repeat="1" 		
+		beansFactoryClass="com.ibm.wssvt.acme.annuity.common.bean.jpa.JPABeansFactory"
+    	description="12.2 - CRUD Contact using MDB and JMS2.0">
+       <configuration>
+			<params>
+				<entry><key>persistenceType</key><value>JPA_EJB</value></entry>
+				 
+			</params>
+		</configuration>
+    </ExecutionUnit>
+
+<!-- 
+<ExecutionUnit class="com.ibm.wssvt.acme.annuity.common.client.executionunit.specialunit.quickreturn.CRUDContactQuickReturnSEU" 
+    	adapterId="16"
+    	repeat="1" 
+		beansFactoryClass="com.ibm.wssvt.acme.annuity.common.bean.jaxbjpa.JAXBJPABeansFactory" 		
+    	description="16.1 - CRUDContactQuickReturn">
+        <configuration>
+            <params/>            
+        </configuration>
+	</ExecutionUnit>
+
+	
+	<ExecutionUnit class="com.ibm.wssvt.acme.annuity.common.client.executionunit.specialunit.quickreturn.CRUDContactQuickReturnSEU" 
+    	adapterId="17"
+    	repeat="1" 
+		beansFactoryClass="com.ibm.wssvt.acme.annuity.common.bean.jaxbjpa.JAXBJPABeansFactory" 		
+    	description="17.1 - CRUDContactQuickReturn">
+        <configuration>
+            <params/>            
+        </configuration>
+	</ExecutionUnit>
+
+
+Rumana commented out JAX-RS 20 tests since security config was failing
+	<ExecutionUnit class="com.ibm.wssvt.acme.annuity.common.client.executionunit.specialunit.quickreturn.CRUDContactQuickReturnSEU" 
+    	adapterId="18" 
+    	repeat="1" 		
+		beansFactoryClass="com.ibm.wssvt.acme.annuity.common.bean.jaxbjpa.JAXBJPABeansFactory"
+    	description="18.1 - Run sync JAXRS-2.0 client with JAXB payload QuickReturn -  CRUDContactQuickReturnSEU">
+       <configuration>
+			<params>
+				<entry><key>persistenceType</key><value>JPA_EJB</value></entry>
+				 
+			</params>
+		</configuration>
+    </ExecutionUnit>
+	
+	<ExecutionUnit class="com.ibm.wssvt.acme.annuity.common.client.executionunit.CRUDContactEU" 
+    	adapterId="18" 
+    	repeat="1" 		
+		beansFactoryClass="com.ibm.wssvt.acme.annuity.common.bean.jaxbjpa.JAXBJPABeansFactory"
+    	description="18.2 - Run sync JAXRS-2.0 client -  CRUD Contact">
+       <configuration>
+			<params>
+				<entry><key>persistenceType</key><value>JPA_EJB</value></entry>
+				 
+			</params>
+		</configuration>
+    </ExecutionUnit>
+	
+	<ExecutionUnit class="com.ibm.wssvt.acme.annuity.common.client.executionunit.specialunit.quickreturn.CRUDPayoutQuickReturnSEU" 
+    	adapterId="18"
+    	repeat="1" 
+		beansFactoryClass="com.ibm.wssvt.acme.annuity.common.bean.jaxbjpa.JAXBJPABeansFactory" 		
+    	description="18.3 - Run sync JAXRS-2.0 client - CRUDPayoutQuickReturnSEU">
+        <configuration>
+            <params/>            
+        </configuration>
+	</ExecutionUnit>
+
+	
+	<ExecutionUnit class="com.ibm.wssvt.acme.annuity.common.client.executionunit.specialunit.quickreturn.CRUDAllEntitiesQuickReturnSEU" 
+    	adapterId="19"
+    	repeat="1" 
+		beansFactoryClass="com.ibm.wssvt.acme.annuity.common.bean.jaxbjpa.JAXBJPABeansFactory" 		
+    	description="19.1 - Run sync JAXRS-2.0 client - CRUDAllEntitiesQuickReturnSEU - with JAXRS 20 and JAXB">
+        <configuration>
+            <params/>            
+        </configuration>		
+	</ExecutionUnit>
+
+	-->
+
+	<ExceptionHandler exceptionClassName="com.ibm.wssvt.acme.*"
+		handlerClassName="com.ibm.wssvt.acme.common.exception.handler.StopExceptionHandler">
+		<configuration>
+			<params>
+				<entry><key>maxCount</key><value>0</value></entry>				
+			</params>
+		</configuration>
+	</ExceptionHandler>
+			
+</AcmeEnvConfig>
