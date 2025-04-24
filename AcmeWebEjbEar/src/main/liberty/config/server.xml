@@ -1,0 +1,184 @@
+<server description="new server">
+
+    <!-- Enable features -->
+    <featureManager>
+         <feature>appClientSupport-2.0</feature>
+        <feature>appSecurity-5.0</feature>
+        <feature>cdi-4.0</feature>
+        <feature>enterpriseBeans-4.0</feature>
+        <feature>ldapRegistry-3.0</feature>
+        <feature>localConnector-1.0</feature>
+        <feature>mdb-4.0</feature>
+        <feature>messaging-3.1</feature>
+        <feature>messagingClient-3.0</feature>
+        <feature>messagingSecurity-3.0</feature>
+        <feature>messagingServer-3.0</feature>
+        <feature>pages-3.1</feature>
+        <feature>persistence-3.1</feature>
+        <feature>restfulWS-3.1</feature>
+        <feature>xmlWS-4.0</feature>
+        <feature>microProfile-6.0</feature>
+	<feature>socialLogin-1.0</feature>
+    </featureManager>
+
+    <!-- To access this server from a remote client add a host attribute to the following element, e.g. host="*" -->
+    <httpEndpoint host="*" httpPort="9080" httpsPort="9443" id="defaultHttpEndpoint"/>
+
+   <!-- Put in the OIDC login info in server.xml -->
+    <oidcLogin id="oidc"
+            discoveryEndpoint="${discoveryEndpoint}"
+            clientId="${clientId}"
+            clientSecret="${clientSecret}" />	
+
+       <!--Commented out for security 
+	<keyStore id="defaultKeyStore" password="{xor}EzY9Oi0rJg=="/> -->
+	
+	<!-- Automatically expand WAR files and EAR files -->
+	<applicationManager autoExpand="true"/>
+	
+	<jdbcDriver id="db2Driver">
+        <library>
+                 <fileset dir="/config/db2jars" id="db2jcc4" includes="db2jcc4.jar, db2jcc_license_cu.jar"/>
+        </library>
+    </jdbcDriver>
+    
+    <library id="thirdPartyLib">
+		<fileset dir="/config/thirdPartyLib" includes="*.jar" scanInterval="5s"/>
+    </library>
+
+<!-- put in this property for JAXRS 20 tests to pass -->
+
+<webTarget sslConfig="defaultSSLConfig" disableCNCheck="true" />
+
+<mpMetrics authentication="false"/>
+<!-- data soruce using auth alias  -->
+<!-- <authData id="AnnuityDBAuth" password="letme1n2.2021Q1" user="db2inst1"/> -->
+<!-- <authData id="AnnuityDBAuth" password="${env.DBPass}" user="${env.DBUser}"/>
+<dataSource containerAuthDataRef="AnnuityDBAuth" id="AnnuityDBDS" jdbcDriverRef="db2Driver" jndiName="AnnuityDBDS"> -->
+        <!-- <properties databaseName="Annuity" driverType="4" portNumber="50000" serverName="test-acme-db-1.fyre.ibm.com"/> -->
+    <!--    <properties serverName="${env.DBHost}" portNumber="${env.DBPort}" databaseName="${env.DBName}" driverType="4"/> 
+        <connectionManager connectionTimeout="60s" maxPoolSize="250" minPoolSize="10"/> 
+</dataSource>  
+-->
+	
+<dataSource jndiName="AnnuityDBDS"  jdbcDriverRef="db2Driver" >
+  <properties serverName="${env.DBHost}"
+                      portNumber="${env.DBPort}"
+                      databaseName="${env.DBName}"
+                      sslConnection="true"
+                      user="${env.DBUser}"
+	              driverType="4"
+                      password="${db-secret}"/>
+   <connectionManager connectionTimeout="60s" maxPoolSize="250" minPoolSize="10"/> 
+</dataSource>
+
+<!-- LDAP setting with secure 
+<ssl id="LDAPSSLSettings" keyStoreRef="ldaptruststore" trustStoreRef="ldaptruststore" />
+<keyStore id="ldaptruststore" location="/config/trustStore.jks" type="JKS" password="passw0rd" />
+<ldapRegistry host="9.46.74.184" baseDN="o=ibm,c=us" port="9636" ldapType="IBM Tivoli Directory Server" id="LDAP_tdirsrv" sslEnabled="true" name="o=ldap1" sslRef="LDAPSSLSettings">
+         <failoverServers name="isdsldapsvt backup">
+	    <server host="9.46.65.198" port="9636"/>
+	    <server host="9.46.74.211" port="9636"/>
+	 </failoverServers>
+</ldapRegistry> 
+-->	
+
+<!-- Change LDAP values to variables so openLDAP can be used -->	
+<!-- Comment out LDAP for EASe
+<ssl id="LDAPSSLSettings" keyStoreRef="ldaptruststore" trustStoreRef="ldaptruststore" />
+<keyStore id="ldaptruststore" location="/config/trustStore.jks" type="JKS" password="passw0rd" />
+<ldapRegistry host="${env.ldapHost}" baseDN="o=ibm,c=us" port="${env.ldapPort}" ldapType="IBM Tivoli Directory Server" id="LDAP_tdirsrv" sslEnabled="false" name="o=ldap1" sslRef="LDAPSSLSettings">
+</ldapRegistry> 
+-->
+
+<!--  
+<ldapRegistry baseDN="o=ibm,c=us" bindDN="cn=root" bindPassword="{xor}Pm4nazI6MDQ=" host="isdsldapsvt2.rtp.raleigh.ibm.com" ldapType="IBM Tivoli Directory Server" port="389">
+</ldapRegistry>
+-->
+<!-- Added in this LDAP config for testing in EASE -->
+	
+<ldapRegistry host="ec2-52-87-90-56.compute-1.amazonaws.com" baseDN="o=ibm,c=us" port="9389" ldapType="IBM Tivoli Directory Server" id="LDAP_tdirsrv" sslEnabled="false" name="o=ldap1" sslRef="LDAPSSLSettings">
+</ldapRegistry>
+<!--
+<wasJmsEndpoint host="aussvt206.rtp.raleigh.ibm.com"/> 
+-->
+
+<!--  Messaging engine needed for the JMS Server -->
+<messagingEngine>
+		<queue id="AcmeAnnuityMgmtSvcEJB30MDBDest"/>
+   		<messagingSecurity>
+      		<role name="admins">
+        <queuePermission queueRef="AcmeAnnuityMgmtSvcEJB30MDBDest">
+        	<action>ALL</action>
+        </queuePermission>                 
+        <tempDestinationPermission prefix="temp">
+         	<action>CREATE</action>
+        	<action>SEND</action>
+        	<action>RECEIVE</action>
+        </tempDestinationPermission>
+        <user name="persona1"/>
+        <user name="persona2"/>
+      </role>
+  	</messagingSecurity>  
+</messagingEngine>
+
+<!--  JMS ConnectionFactory using JMS Auth Alias -->
+<jmsConnectionFactory containerAuthDataRef="AnnuityJMSAuth" id="ACMEAnnuityJMSConnectionFactory" jndiName="jms/ACMEAnnuityJMSConnectionFactory">       
+ <properties.wasJms/>
+ <!--  	<properties.wasJms password="{xor}Ly86LSwwMT5u" userName="persona1"/>  --> 
+</jmsConnectionFactory>
+
+
+<jmsQueue id="AcmeAnnuityMgmtSvcEJB30MDBQueue" jndiName="jms/AcmeAnnuityMgmtSvcEJB30MDBQueue">
+    	<properties.wasJms queueName="AcmeAnnuityMgmtSvcEJB30MDBDest"/>
+</jmsQueue>
+
+<authData id="AnnuityJMSAuth" password="{xor}Ly86LSwwMT5u " user="persona1"/>
+
+<jmsActivationSpec id="AcmeWebEjbEar/AcmeAnnuityEJB3MDB/JMS20AcmeAnnuityMgmtSvcEJB30MDBBean">
+ <!--  <properties.wasJms destinationRef="AcmeAnnuityMgmtSvcEJB30MDBQueue" password="ppersona1" remoteServerAddress="nc9048149237.tivlab.austin.ibm.com:7276:BootstrapBasicMessaging" userName="persona1"/> -->
+   <properties.wasJms destinationRef="AcmeAnnuityMgmtSvcEJB30MDBQueue"/> <!--  remoteServerAddress="nc9048149237.tivlab.austin.ibm.com:7276:BootstrapBasicMessaging"  -->
+  	<authData password="{xor}Ly86LSwwMT5u" user="persona1"/>
+</jmsActivationSpec>	
+
+ 
+ <!-- for ssl jaxrs jaxrsSSLConfig -->
+<!-- <keyStore id="defaultTrustStore" location="${shared.resource.dir}/security/trust.jks" password="{xor}EzY9Oi0rJg=="/>  
+<keyStore id="jaxrsTrustStore" location="/config/trust.jks" password="{xor}EzY9Oi0rJg=="/>
+ 
+<sslDefault sslRef="jaxrsSSLConfig"/> -->
+<!-- add trustStore for ssl jaxrs -->
+<!-- <ssl clientAuthenticationSupported="true" id="defaultSSLConfig" keyStoreRef="defaultKeyStore" trustStoreRef="defaultTrustStore"/> 
+<ssl clientAuthenticationSupported="true" id="jaxrsSSLConfig" keyStoreRef="defaultKeyStore" trustStoreRef="jaxrsTrustStore"/> -->
+ 
+  
+<iiopEndpoint id="defaultIiopEndpoint" iiopPort="2814">
+    <iiopsOptions iiopsPort="2815" sslRef="defaultSSLConfig"/>
+</iiopEndpoint>  
+
+<applicationMonitor updateTrigger="mbean"/>
+
+<!-- Tracing 
+<logging traceSpecification="org.apache.xml.security.*=all:com.ibm.ws.security.*=all:com.ibm.ws.webcontainer.*=all:com.ibm.ws.http.*=all:com.ibm.ws.ssl.*=all:com.ibm.ws.channel.ssl.*=all:com.ibm.ws.transport.http.*=all:com.ibm.websphere.channelfw.ChannelUtils=all:org.opensaml.*=all"  maxFileSize="100" maxFiles="20" traceFileName="server_trace.log" />
+<logging traceSpecification="*=info:com.ibm.ws.webservices.*=all:org.apache.*=all:com.ibm.ws.websvcs.*=all:com.ibm.ws.metadata.*=all:com.ibm.ws.jaxrs.*=all:com.ibm.websphere.jaxrs.*=all:org.apache.wink.*=all" maxFileSize="100" maxFiles="20" traceFileName="server_trace.log" />
+
+<logging maxFileSize="100" maxFiles="20" traceFileName="server_trace.log" traceSpecification="*=info:com.ibm.ws.jaxrs.*=all:com.ibm.websphere.jaxrs.*=all:com.ibm.ws.security.*=all:com.ibm.ws.jaxrs.*=all"/>
+-->
+
+    <enterpriseApplication id="AcmeWebEjbEar" location="AcmeWebEjbEar.ear" name="AcmeWebEjbEar">
+    <application-bnd>
+    		<security-role name="admins">
+    			<user name="persona1"/>
+    			<user name="persona2"/>
+    			<special-subject type="ALL_AUTHENTICATED_USERS"/>
+    			<run-as password="{xor}Ly86LSwwMT5u" userid="persona1"/>    		
+    		</security-role>
+    		<security-role name="users">
+    			<user name="persona1"/>
+    			<user name="persona2"/>
+    			<special-subject type="ALL_AUTHENTICATED_USERS"/>
+    		</security-role>  		
+    	</application-bnd> 
+    	<classloader commonLibraryRef="thirdPartyLib"/> 
+    </enterpriseApplication>
+</server>
