@@ -9,6 +9,7 @@
 <!--  
   <groupId>AcmeWebEjbEar</groupId> -->
   <artifactId>AcmeWebEjbEar</artifactId>
+	
 <!--    <version>0.0.1-SNAPSHOT</version> -->
 
   <packaging>ear</packaging>
